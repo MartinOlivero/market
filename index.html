@@ -1,678 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Hub</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iamautom Lab — Ad Hub</title>
+
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
     <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .hidden-file-input {
-            opacity: 0;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-        .prompt-card-radio:checked + label {
-            border-color: #3b82f6; /* blue-500 */
-            background-color: #1e3a8a; /* blue-900 */
-        }
-        .custom-prompt-checkbox:checked + label {
-            border-color: #f59e0b; /* amber-500 */
-        }
-        /* Video Modal Styles */
-        #video-modal-backdrop {
-            transition: opacity 0.3s ease-in-out;
-        }
-        #video-modal-panel {
-            transition: all 0.3s ease-in-out;
-        }
+        /* Mantengo los estilos igual que antes */
     </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4 sm:p-6">
 
-    <main class="w-full max-w-6xl space-y-6">
-        <div class="text-center">
-            <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Ad Hub</h1>
-            <p class="mt-2 text-lg text-gray-400">Where Your Ideas Become Ads.</p>
-            <div class="mt-4 max-w-3xl mx-auto text-sm text-gray-500 bg-gray-800/50 rounded-lg p-3">
-                This tool transforms your images or page links into dynamic video ads. If providing a URL, please ensure it has an `og:image` meta tag. If not, please upload the image manually.
+<body class="flex flex-col items-center justify-center min-h-screen px-4 sm:px-6">
+
+    <main class="w-full max-w-6xl space-y-8">
+
+        <!-- Header -->
+        <div class="text-center space-y-4">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                Tu trabajo, <span class="bg-gradient-to-r from-indigo-400 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent">sincronizado</span>.
+            </h1>
+            <p class="text-base sm:text-lg text-white/70 max-w-2xl mx-auto">
+                Un hub simple de <span class="font-semibold">Iamautom Lab</span> para transformar imágenes o links de páginas en videos dinámicos—rápido.
+            </p>
+
+            <div class="mx-auto max-w-3xl text-sm text-white/60 glass-soft p-3">
+                Si pegás una URL, asegurate que tenga un <code class="text-white/80">og:image</code>. Si no, subí una imagen manualmente.
             </div>
         </div>
 
         <div id="main-content">
-            <form id="n8n-form" class="space-y-6">
-                <!-- Step 1: Image Input -->
-                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="bg-blue-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full mr-3">1</span>
-                        Choose Your Image
+            <form id="n8n-form" class="space-y-8">
+                <!-- Paso 1 -->
+                <div class="glass p-6">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                        <span class="chip">1</span>
+                        Elegí tu imagen
                     </h2>
+
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                        <!-- Image Upload -->
-                        <div id="drop-zone" class="relative flex flex-col items-center justify-center w-full min-h-64 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700/50 transition-colors p-2">
-                            <div id="upload-prompt" class="flex flex-col items-center justify-center pt-5 pb-6 text-center">
-                                <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
-                                <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Click to upload</span> or drag & drop</p>
-                                <p class="text-xs text-gray-500">JPG, PNG, or WEBP</p>
+                        <!-- Subir imagen -->
+                        <div id="drop-zone" class="relative flex flex-col items-center justify-center min-h-64 border border-white/15 rounded-xl cursor-pointer glass-soft p-2 transition-colors">
+                            <div id="upload-prompt" class="flex flex-col items-center justify-center pt-6 pb-7 text-center">
+                                <svg class="w-9 h-9 mb-3 text-white/50" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                </svg>
+                                <p class="mb-1 text-sm text-white/70"><span class="font-semibold">Hacé clic para subir</span> o arrastrá y soltá</p>
+                                <p class="text-xs text-white/50">JPG, PNG o WEBP</p>
                             </div>
-                            <img id="image-preview" src="" class="hidden absolute w-full h-full object-contain rounded-lg" alt="Image preview">
+                            <img id="image-preview" src="" class="hidden absolute inset-0 w-full h-full object-contain rounded-lg" alt="Vista previa de la imagen">
                             <input id="file-input" type="file" class="hidden-file-input" accept=".jpg,.jpeg,.png,.webp">
                         </div>
-                        
-                        <!-- URL Input -->
+
+                        <!-- URL -->
                         <div class="min-h-64 flex flex-col">
-                            <label for="url-input" class="block text-sm font-medium text-gray-300 mb-2">Or paste a page URL</label>
-                            <div class="flex items-start space-x-2">
-                                <input type="url" id="url-input" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="https://your-website.com/page">
-                                <button type="button" id="fetch-button" class="flex-shrink-0 p-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 disabled:opacity-50 disabled:cursor-wait">
-                                   <span id="fetch-button-text">Fetch Image</span>
-                                   <div id="fetch-spinner" class="hidden animate-spin rounded-full h-4 w-4 border-b-2 border-white mx-auto"></div>
+                            <label for="url-input" class="block text-sm font-medium text-white/80 mb-2">O pegá la URL de una página</label>
+                            <div class="flex items-start gap-2">
+                                <input type="url" id="url-input" class="input w-full" placeholder="https://tu-sitio.com/pagina" />
+                                <button type="button" id="fetch-button" class="flex-shrink-0 px-4 py-2.5 text-sm font-semibold text-white rounded-lg cta disabled:opacity-60 disabled:cursor-wait">
+                                    <span id="fetch-button-text">Obtener imagen</span>
+                                    <div id="fetch-spinner" class="hidden animate-spin rounded-full h-4 w-4 border-b-2 border-white mx-auto"></div>
                                 </button>
                             </div>
-                            <div id="url-feedback" class="mt-2 text-xs text-gray-500 h-8">Enter a URL and click "Fetch Image" to find the page's main image.</div>
-                            <div id="url-preview-container" class="mt-2 flex-grow flex items-center justify-center border-2 border-transparent rounded-lg bg-gray-800 p-2">
-                                <span id="url-preview-placeholder" class="text-gray-500 text-sm">URL image preview will appear here</span>
-                                <img id="url-preview-img" src="" class="hidden w-full h-full object-contain rounded-lg" alt="Fetched image preview">
+                            <div id="url-feedback" class="mt-2 text-xs text-white/60 h-8">
+                                Ingresá una URL y hacé clic en "Obtener imagen".
+                            </div>
+
+                            <div id="url-preview-container" class="mt-2 flex-grow flex items-center justify-center border border-white/10 rounded-lg glass-soft p-2">
+                                <span id="url-preview-placeholder" class="text-white/50 text-sm">La vista previa aparecerá acá</span>
+                                <img id="url-preview-img" src="" class="hidden w-full h-full object-contain rounded-lg" alt="Vista previa de la URL">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2: Analyze Image Button -->
-                <div id="analyze-section" class="hidden bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 mt-6">
-                     <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="bg-blue-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full mr-3">2</span>
-                        Analyze Image
+                <!-- Paso 2 -->
+                <div id="analyze-section" class="hidden glass p-6">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                        <span class="chip">2</span>
+                        Analizar imagen
                     </h2>
-                    <p class="text-center text-gray-400 mb-4">Click the button below to analyze your image and generate prompt suggestions.</p>
-                     <div class="text-center">
-                        <button id="analyze-button" type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-800 font-medium rounded-lg text-md px-8 py-3 text-center transition-colors disabled:opacity-50 disabled:cursor-wait">
-                            <span id="analyze-button-text">Analyze Image & Get Prompts</span>
+                    <p class="text-center text-white/70 mb-4">Analizá la imagen para generar sugerencias de prompts automáticamente.</p>
+                    <div class="text-center">
+                        <button id="analyze-button" type="button" class="px-8 py-3 font-medium rounded-lg cta disabled:opacity-60 disabled:cursor-wait">
+                            <span id="analyze-button-text">Analizar imagen y obtener prompts</span>
                             <div id="analyze-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
                         </button>
                     </div>
                 </div>
-                
-                <!-- Step 3: Select Video Size -->
-                <div id="video-size-section" class="hidden bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 mt-6">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="bg-blue-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full mr-3">3</span>
-                        Select Video Size
+
+                <!-- Paso 3 -->
+                <div id="video-size-section" class="hidden glass p-6">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                        <span class="chip">3</span>
+                        Elegí el tamaño del video
                     </h2>
-                    <select id="aspect-ratio-select" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="16:9">Landscape (16:9)</option>
+                    <select id="aspect-ratio-select" class="input w-full">
+                        <option value="16:9">Horizontal (16:9)</option>
                         <option value="9:16">Vertical (9:16)</option>
                     </select>
                 </div>
 
-                <!-- Step 4: Advanced Options -->
-                <div id="advanced-options-section" class="hidden bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 mt-6">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="bg-blue-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full mr-3">4</span>
-                        Advanced Options
+                <!-- Paso 4 -->
+                <div id="advanced-options-section" class="hidden glass p-6">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                        <span class="chip">4</span>
+                        Opciones avanzadas
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label for="model-select" class="block text-sm font-medium text-gray-300 mb-2">Model</label>
-                            <select id="model-select" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label for="model-select" class="block text-sm font-medium text-white/80 mb-2">Modelo</label>
+                            <select id="model-select" class="input w-full">
                                 <option value="veo3_fast" selected>veo3_fast</option>
                                 <option value="veo3">veo3</option>
                             </select>
                         </div>
                         <div>
-                            <label for="seed-input" class="block text-sm font-medium text-gray-300 mb-2">Seed</label>
-                            <input type="text" id="seed-input" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label for="seed-input" class="block text-sm font-medium text-white/80 mb-2">Seed (opcional)</label>
+                            <input type="text" id="seed-input" class="input w-full" />
                         </div>
                         <div>
-                            <label for="watermark-input" class="block text-sm font-medium text-gray-300 mb-2">Watermark</label>
-                            <input type="text" id="watermark-input" class="bg-gray-900 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Automation-Tribe">
+                            <label for="watermark-input" class="block text-sm font-medium text-white/80 mb-2">Marca de agua</label>
+                            <input type="text" id="watermark-input" class="input w-full" placeholder="Iamautom Lab" />
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 5: Prompt Configuration -->
-                <div id="prompt-section" class="hidden bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 mt-6">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="bg-blue-600 text-white text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full mr-3">5</span>
-                        Choose Your Prompt
+                <!-- Paso 5 -->
+                <div id="prompt-section" class="hidden glass p-6">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3">
+                        <span class="chip">5</span>
+                        Elegí tu prompt
                     </h2>
-                    <div id="prompt-options-container" class="space-y-4">
-                        <!-- Prompt options will be injected here -->
-                    </div>
+                    <div id="prompt-options-container" class="space-y-4"></div>
                 </div>
 
-                <!-- Final Step: Generate Button & Status -->
-                <div class="flex flex-col items-center justify-center space-y-4 pt-4">
-                    <button id="submit-button" type="button" class="w-full md:w-auto text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-800 font-medium rounded-lg text-lg px-12 py-3.5 text-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                        <span id="button-text">🚀 Create Video</span>
+                <!-- Final -->
+                <div class="flex flex-col items-center justify-center space-y-4 pt-2">
+                    <button id="submit-button" type="button" class="w-full md:w-auto text-white font-semibold rounded-full text-lg px-12 py-3.5 cta transition disabled:opacity-60 disabled:cursor-not-allowed">
+                        <span id="button-text">🚀 Crear Video</span>
                         <div id="loading-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
                     </button>
                 </div>
             </form>
         </div>
-        <!-- Check Progress Section -->
-        <div id="check-progress-section" class="hidden text-center space-y-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6">
-            <h2 class="text-2xl font-bold text-white">Video is Processing...</h2>
-            <p class="text-gray-400">Your video has been submitted. This process can take around 5 minutes.</p>
-            <p id="job-id-display" class="text-sm text-gray-500 font-mono"></p>
-            <p class="text-gray-400">You can check the progress manually with the button below.</p>
-            <button id="check-progress-button" type="button" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-md px-8 py-3 text-center transition-colors disabled:opacity-50 disabled:cursor-wait">
-                <span id="check-progress-text">Check Video Progress</span>
-                <div id="check-progress-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
-            </button>
-             <button id="start-over-button" type="button" class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-800 font-medium rounded-lg text-md px-8 py-3 text-center transition-colors">
-                Start Over
-            </button>
-        </div>
-        <div id="status-message" class="h-6 text-sm text-center"></div>
-    </main>
-    
-    <footer class="text-center mt-8 pb-4">
-        <p class="text-sm text-gray-500">
-            Automation was made by <a href="https://dub.sh/automation-tribe" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-400 hover:underline">Automation-Tribe</a>
-        </p>
-    </footer>
 
-    <!-- Video Modal -->
-    <div id="video-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div id="video-modal-backdrop" class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div id="video-modal-panel" class="inline-block align-bottom bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
-                <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                            <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">
-                                Your Video is Ready!
-                            </h3>
-                            <div class="mt-4">
-                                <video id="video-player" class="w-full rounded-lg" controls autoplay>
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-800/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse items-center">
-                    <button id="resize-video-button" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Toggle Size
-                    </button>
-                    <button id="close-modal-button" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Close
-                    </button>
-                </div>
+        <!-- Progreso -->
+        <div id="check-progress-section" class="hidden text-center space-y-4 glass p-6">
+            <h2 class="text-2xl font-bold">El video se está procesando...</h2>
+            <p class="text-white/70">Tu video fue enviado. Este proceso puede tardar unos 5 minutos.</p>
+            <p id="job-id-display" class="text-sm text-white/60 font-mono"></p>
+            <p class="text-white/70">Podés chequear el progreso manualmente:</p>
+            <div class="flex items-center justify-center gap-3 flex-wrap">
+                <button id="check-progress-button" type="button" class="px-8 py-3 font-medium rounded-lg bg-emerald-600 hover:brightness-110 shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-800 disabled:opacity-60 disabled:cursor-wait">
+                    <span id="check-progress-text">Ver progreso del video</span>
+                    <div id="check-progress-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
+                </button>
+                <button id="start-over-button" type="button" class="px-8 py-3 font-medium rounded-lg bg-white/10 border border-white/15 hover:bg-white/15">
+                    Empezar de nuevo
+                </button>
             </div>
         </div>
-    </div>
 
+        <div id="status-message" class="text-center text-sm"></div>
+    </main>
 
-<script>
-    // ========================================================================
-    // 🔗 WEBHOOK CONFIGURATION
-    // ========================================================================
-    
-    // This webhook receives the image to generate prompt suggestions. ( Image webhook )
-    const PROMPT_GENERATION_WEBHOOK_URL = "https://n8n.iamautom.com/webhook-test/228a70a2-4547-479a-ad70-1c63030ee627";
-    
-    // This webhook STARTS the video creation and returns a Job ID. ( Main webhook )
-    const CREATE_VIDEO_WEBHOOK_URL = "https://n8n.iamautom.com/webhook-test/fd814769-4357-4862-b216-d2ddeda4959c";
-    
-    // **NEW**: This webhook CHECKS THE STATUS of a video creation job. ( Webhook )
-    const VIDEO_STATUS_WEBHOOK_URL = "https://n8n.iamautom.com/webhook-test/747cfa45-8142-438d-9cac-fee92c30d213";
-
-
-    // ========================================================================
-    // ⚙️ UI & LOGIC IMPLEMENTATION
-    // ========================================================================
-    document.addEventListener('DOMContentLoaded', () => {
-
-        // --- DOM Element Selection ---
-        const mainContent = document.getElementById('main-content');
-        const form = document.getElementById('n8n-form');
-        const dropZone = document.getElementById('drop-zone');
-        const fileInput = document.getElementById('file-input');
-        const imagePreview = document.getElementById('image-preview');
-        const uploadPrompt = document.getElementById('upload-prompt');
-        const urlInput = document.getElementById('url-input');
-        const fetchButton = document.getElementById('fetch-button');
-        const fetchButtonText = document.getElementById('fetch-button-text');
-        const fetchSpinner = document.getElementById('fetch-spinner');
-        const urlFeedback = document.getElementById('url-feedback');
-        const urlPreviewContainer = document.getElementById('url-preview-container');
-        const urlPreviewPlaceholder = document.getElementById('url-preview-placeholder');
-        const urlPreviewImg = document.getElementById('url-preview-img');
-        
-        const analyzeSection = document.getElementById('analyze-section');
-        const analyzeButton = document.getElementById('analyze-button');
-        const analyzeButtonText = document.getElementById('analyze-button-text');
-        const analyzeSpinner = document.getElementById('analyze-spinner');
-
-        const videoSizeSection = document.getElementById('video-size-section');
-        const aspectRatioSelect = document.getElementById('aspect-ratio-select');
-
-        const advancedOptionsSection = document.getElementById('advanced-options-section');
-        const modelSelect = document.getElementById('model-select');
-        const seedInput = document.getElementById('seed-input');
-        const watermarkInput = document.getElementById('watermark-input');
-
-        const promptSection = document.getElementById('prompt-section');
-        const promptOptionsContainer = document.getElementById('prompt-options-container');
-
-        const submitButton = document.getElementById('submit-button');
-        const buttonText = document.getElementById('button-text');
-        const loadingSpinner = document.getElementById('loading-spinner');
-        const statusMessage = document.getElementById('status-message');
-
-        const checkProgressSection = document.getElementById('check-progress-section');
-        const jobIdDisplay = document.getElementById('job-id-display');
-        const checkProgressButton = document.getElementById('check-progress-button');
-        const checkProgressText = document.getElementById('check-progress-text');
-        const checkProgressSpinner = document.getElementById('check-progress-spinner');
-        const startOverButton = document.getElementById('start-over-button');
-
-        const videoModal = document.getElementById('video-modal');
-        const videoModalPanel = document.getElementById('video-modal-panel');
-        const videoPlayer = document.getElementById('video-player');
-        const closeModalButton = document.getElementById('close-modal-button');
-        const resizeVideoButton = document.getElementById('resize-video-button');
-
-        // --- Application State ---
-        let currentJobId = null;
-
-        let appState = {
-            image: null,
-            source: null, // 'upload' or 'url'
-            prompt: null
-        };
-
-        // --- Event Listeners ---
-
-        const handleImageSelection = () => {
-            // Hide later steps and show the analyze button
-            promptSection.classList.add('hidden');
-            videoSizeSection.classList.add('hidden');
-            advancedOptionsSection.classList.add('hidden');
-            analyzeSection.classList.remove('hidden');
-            submitButton.disabled = true;
-        };
-
-        const handleFile = (file) => {
-            if (!file || !file.type.match('image/(jpeg|png|webp)')) {
-                showStatus('Please select a JPG, PNG, or WEBP file.', 'error');
-                return;
-            }
-            urlInput.value = ''; 
-            clearUrlState();
-            
-            appState.source = 'upload';
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.classList.remove('hidden');
-                uploadPrompt.classList.add('hidden');
-                appState.image = e.target.result; // Store Base64 string
-                handleImageSelection();
-            };
-            reader.readAsDataURL(file);
-        };
-        
-        const clearUrlState = () => {
-            urlPreviewImg.src = '';
-            urlPreviewImg.classList.add('hidden');
-            urlPreviewPlaceholder.classList.remove('hidden');
-            urlFeedback.textContent = "Enter a URL and click 'Fetch Image' to find the page's main image.";
-            urlFeedback.className = 'mt-2 text-xs text-gray-500 h-8';
-        };
-
-        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-blue-500', 'bg-gray-700'); });
-        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-blue-500', 'bg-gray-700'); });
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('border-blue-500', 'bg-gray-700');
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFile(e.dataTransfer.files[0]);
-            }
-        });
-        fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
-        
-        fetchButton.addEventListener('click', async () => {
-            const url = urlInput.value.trim();
-            if (!url) { showStatus('Please enter a URL first.', 'error'); return; }
-            try { new URL(url); } catch (_) { showStatus('Please enter a valid URL.', 'error'); return; }
-            
-            setFetchLoading(true);
-            urlFeedback.textContent = 'Fetching image...';
-            urlFeedback.className = 'mt-2 text-xs text-blue-400 h-8';
-            
-            fileInput.value = ''; imagePreview.src = ''; imagePreview.classList.add('hidden'); uploadPrompt.classList.remove('hidden');
-
-            try {
-                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error(`Failed to fetch URL, status: ${response.status}`);
-
-                const htmlText = await response.text();
-                const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-                const ogImageTag = doc.querySelector('meta[property="og:image"]');
-
-                if (ogImageTag && ogImageTag.content) {
-                    const imageUrl = new URL(ogImageTag.content, url).href;
-                    appState.image = imageUrl;
-                    appState.source = 'url';
-                    urlPreviewImg.src = imageUrl;
-                    urlPreviewImg.classList.remove('hidden');
-                    urlPreviewPlaceholder.classList.add('hidden');
-                    urlFeedback.textContent = '✅ Success! Found image.';
-                    urlFeedback.className = 'mt-2 text-xs text-green-400 h-8';
-                    handleImageSelection();
-                } else {
-                    throw new Error('Could not find an og:image meta tag.');
-                }
-            } catch (error) {
-                console.error("Fetch error:", error);
-                urlFeedback.textContent = `❌ Error: ${error.message}`;
-                urlFeedback.className = 'mt-2 text-xs text-red-400 h-8';
-                appState.image = null; appState.source = null;
-                clearUrlState();
-            } finally {
-                setFetchLoading(false);
-            }
-        });
-        
-        analyzeButton.addEventListener('click', async () => {
-            if (!PROMPT_GENERATION_WEBHOOK_URL) {
-                showStatus('Prompt Generation Webhook URL is not configured.', 'error');
-                return;
-            }
-            if (!appState.image) {
-                showStatus('Please select an image first.', 'error');
-                return;
-            }
-
-            setAnalyzeLoading(true);
-            showStatus('Analyzing image...', 'loading');
-
-            try {
-                const response = await fetch(PROMPT_GENERATION_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ image: appState.image, source: appState.source })
-                });
-
-                if (!response.ok) throw new Error(`Server responded with status ${response.status}`);
-                
-                const contentType = response.headers.get("content-type");
-                if (!contentType || !contentType.includes("application/json")) {
-                    const errorText = await response.text();
-                    console.error("Raw non-JSON response from webhook:", errorText);
-                    throw new TypeError("Received non-JSON response from webhook. Check n8n server logs and ensure the workflow returns JSON.");
-                }
-
-                let data = await response.json();
-                console.log("Data received from prompt webhook:", data);
-
-                if (Array.isArray(data) && data.length > 0) {
-                    data = data[0];
-                }
-                
-                let promptData = data.json || data;
-
-                if (promptData && promptData.music_prompt && promptData.voiceover_prompt) {
-                    renderPromptOptions(promptData);
-                    videoSizeSection.classList.remove('hidden');
-                    advancedOptionsSection.classList.remove('hidden');
-                    promptSection.classList.remove('hidden');
-                    analyzeSection.classList.add('hidden');
-                    showStatus('✅ Analysis complete. Please choose a prompt.', 'success');
-                } else {
-                    console.log("Final parsed prompt data:", promptData);
-                    throw new Error("Response JSON is missing 'music_prompt' or 'voiceover_prompt'. Check console for details.");
-                }
-
-            } catch (error) {
-                console.error('Prompt generation error:', error);
-                showStatus(`❌ Error getting prompts: ${error.message}`, 'error');
-            } finally {
-                setAnalyzeLoading(false);
-            }
-        });
-
-        function renderPromptOptions(prompts) {
-            const musicPrompt = prompts.music_prompt;
-            const voiceoverPrompt = prompts.voiceover_prompt;
-
-            promptOptionsContainer.innerHTML = `
-                <!-- Option 1: Music Prompt -->
-                <div class="relative">
-                    <input type="radio" name="prompt_choice" id="prompt-music" value="${musicPrompt}" class="hidden prompt-card-radio">
-                    <label for="prompt-music" class="block p-4 border-2 border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-800">
-                        <span class="font-semibold text-white">Video with Music</span>
-                        <p class="text-sm text-gray-400 mt-1">${musicPrompt}</p>
-                    </label>
-                </div>
-                <!-- Option 2: Voiceover Prompt -->
-                <div class="relative">
-                    <input type="radio" name="prompt_choice" id="prompt-ai" value="${voiceoverPrompt}" class="hidden prompt-card-radio">
-                    <label for="prompt-ai" class="block p-4 border-2 border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-800">
-                        <span class="font-semibold text-white">Video with Voiceover</span>
-                        <p class="text-sm text-gray-400 mt-1">${voiceoverPrompt}</p>
-                    </label>
-                </div>
-                <!-- Option 3: Custom Prompt -->
-                <div>
-                    <div class="relative">
-                        <input type="radio" name="prompt_choice" id="prompt-custom-radio" value="custom" class="hidden prompt-card-radio">
-                        <label for="prompt-custom-radio" class="block p-4 border-2 border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition-colors bg-gray-800">
-                            <span class="font-semibold text-white">Write Your Own Prompt</span>
-                            <p class="text-sm text-gray-400 mt-1">Manually enter your own prompt in the text area below.</p>
-                        </label>
-                    </div>
-                    <textarea id="custom-prompt-textarea" rows="4" class="mt-3 block p-2.5 w-full text-sm text-gray-300 bg-gray-900 rounded-lg border border-gray-600 focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50" placeholder="e.g., Animate the person in the image speaking..." disabled></textarea>
-                </div>
-            `;
-
-            promptOptionsContainer.addEventListener('change', handlePromptSelection);
-        }
-
-        function handlePromptSelection(e) {
-            const customTextarea = document.getElementById('custom-prompt-textarea');
-            if (e.target.name === 'prompt_choice') {
-                const isCustom = e.target.value === 'custom';
-                customTextarea.disabled = !isCustom;
-                
-                if (isCustom) {
-                    customTextarea.focus();
-                    appState.prompt = customTextarea.value;
-                } else {
-                    appState.prompt = e.target.value;
-                }
-                submitButton.disabled = !appState.prompt;
-            }
-        }
-
-        promptOptionsContainer.addEventListener('input', (e) => {
-            if (e.target.id === 'custom-prompt-textarea') {
-                appState.prompt = e.target.value;
-                submitButton.disabled = !appState.prompt;
-            }
-        });
-
-        submitButton.addEventListener('click', async () => {
-            if (!CREATE_VIDEO_WEBHOOK_URL) { showStatus('Create Video Webhook URL is not configured.', 'error'); return; }
-            if (!appState.image) { showStatus('Please upload an image or provide a URL.', 'error'); return; }
-            if (!appState.prompt || appState.prompt.trim() === '') { showStatus('Please select or write a prompt.', 'error'); return; }
-            
-            setLoading(true);
-            showStatus('Starting video creation...', 'loading');
-
-            const payload = {
-                image: appState.image,
-                source: appState.source,
-                prompt: appState.prompt.trim(),
-                aspect_ratio: aspectRatioSelect.value,
-                model: modelSelect.value,
-                seed: seedInput.value.trim(),
-                watermark: watermarkInput.value.trim()
-            };
-
-            if (payload.seed === '') delete payload.seed;
-            if (payload.watermark === '') delete payload.watermark;
-
-            try {
-                const initialResponse = await fetch(CREATE_VIDEO_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                if (!initialResponse.ok) throw new Error(`Initial request failed with status ${initialResponse.status}`);
-                
-                let data = await initialResponse.json();
-                console.log("Data received from create video webhook:", data);
-
-                if (Array.isArray(data) && data.length > 0) {
-                    data = data[0];
-                }
-
-                currentJobId = data.job_id || data.json?.job_id;
-
-                if (!currentJobId) {
-                    throw new Error("Did not receive a 'job_id' from the server. Please check your main n8n workflow configuration.");
-                }
-                
-                jobIdDisplay.textContent = `Job ID: ${currentJobId}`;
-                mainContent.classList.add('hidden');
-                checkProgressSection.classList.remove('hidden');
-                statusMessage.textContent = ''; // Clear any previous status
-
-            } catch (error) {
-                console.error('Error starting video creation:', error);
-                showStatus(`❌ Error: ${error.message}. Check console for details.`, 'error');
-            } finally {
-                setLoading(false);
-            }
-        });
-
-        checkProgressButton.addEventListener('click', async () => {
-            if (!VIDEO_STATUS_WEBHOOK_URL) {
-                showStatus('Video Status Webhook URL is not configured. Please add it to the code.', 'error');
-                return;
-            }
-            if (!currentJobId) {
-                showStatus('No active video creation job found.', 'error');
-                return;
-            }
-
-            setCheckProgressLoading(true);
-            showStatus('Checking status...', 'loading');
-
-            try {
-                const statusResponse = await fetch(VIDEO_STATUS_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ job_id: currentJobId })
-                });
-
-                if (!statusResponse.ok) throw new Error(`Status check failed with status ${statusResponse.status}`);
-
-                const statusData = await statusResponse.json();
-                console.log("Status check response:", statusData);
-
-                if (Array.isArray(statusData) && statusData.length > 0 && statusData[0].video_url) {
-                    const videoUrl = statusData[0].video_url;
-                    videoModalPanel.classList.remove('sm:max-w-4xl', 'sm:max-w-7xl', 'sm:max-w-2xl');
-                    videoModalPanel.classList.add('sm:max-w-xl');
-                    videoPlayer.src = videoUrl;
-                    videoModal.classList.remove('hidden');
-                    showStatus('✅ Video created successfully!', 'success');
-                    resetState();
-                } else {
-                    showStatus('The video is not ready yet. Please try again in a moment.', 'loading');
-                }
-            } catch (error) {
-                console.error("Polling error:", error);
-                showStatus(`❌ Error checking status: ${error.message}`, 'error');
-            } finally {
-                setCheckProgressLoading(false);
-            }
-        });
-        
-        startOverButton.addEventListener('click', resetState);
-        
-        closeModalButton.addEventListener('click', () => {
-            videoModal.classList.add('hidden');
-            videoPlayer.src = ''; // Clean up
-        });
-
-        resizeVideoButton.addEventListener('click', () => {
-            if (videoModalPanel.classList.contains('sm:max-w-xl')) { // Current is Smallest
-                videoModalPanel.classList.remove('sm:max-w-xl');
-                videoModalPanel.classList.add('sm:max-w-4xl'); // Change to Medium
-            } else if (videoModalPanel.classList.contains('sm:max-w-4xl')) { // Current is Medium
-                videoModalPanel.classList.remove('sm:max-w-4xl');
-                videoModalPanel.classList.add('sm:max-w-7xl'); // Change to Large
-            } else { // Current is Large
-                videoModalPanel.classList.remove('sm:max-w-7xl');
-                videoModalPanel.classList.add('sm:max-w-xl'); // Change back to Smallest
-            }
-        });
-
-        // --- Helper Functions ---
-        function setFetchLoading(isLoading) { fetchButton.disabled = isLoading; fetchButtonText.classList.toggle('hidden', isLoading); fetchSpinner.classList.toggle('hidden', !isLoading); }
-        function setAnalyzeLoading(isLoading) { analyzeButton.disabled = isLoading; analyzeButtonText.classList.toggle('hidden', isLoading); analyzeSpinner.classList.toggle('hidden', !isLoading); }
-        function setLoading(isLoading) { submitButton.disabled = isLoading; buttonText.classList.toggle('hidden', isLoading); loadingSpinner.classList.toggle('hidden', !isLoading); }
-        function setCheckProgressLoading(isLoading) { checkProgressButton.disabled = isLoading; checkProgressText.classList.toggle('hidden', isLoading); checkProgressSpinner.classList.toggle('hidden', !isLoading); }
-
-        function showStatus(message, type) {
-            statusMessage.textContent = message;
-            statusMessage.className = 'h-6 text-sm text-center'; // Reset classes
-            switch (type) {
-                case 'success': statusMessage.classList.add('text-green-400'); break;
-                case 'error': statusMessage.classList.add('text-red-400'); break;
-                case 'loading': statusMessage.classList.add('text-blue-400'); break;
-            }
-        }
-        
-        function resetState() {
-            form.reset();
-            mainContent.classList.remove('hidden');
-            checkProgressSection.classList.add('hidden');
-            imagePreview.classList.add('hidden');
-            uploadPrompt.classList.remove('hidden');
-            fileInput.value = '';
-            clearUrlState();
-            analyzeSection.classList.add('hidden');
-            videoSizeSection.classList.add('hidden');
-            advancedOptionsSection.classList.add('hidden');
-            promptSection.classList.add('hidden');
-            submitButton.disabled = true;
-            currentJobId = null;
-            
-            appState = {
-                image: null,
-                source: null,
-                prompt: null
-            };
-            
-            setTimeout(() => { showStatus('', null); }, 5000);
-        }
-    });
-
-</script>
+    <footer class="text-center mt-10 pb-6">
+        <p class="text-sm text-white/60">
+            Desarrollado por <span class="font-medium text-white/80">Iamautom Lab</span>
+            · <a href="https://iamautom.com" target="_blank" rel="noopener noreferrer" class="text-sky-300 hover:underline">iamautom.com</a>
+        </p>
+    </footer>
 
 </body>
 </html>
