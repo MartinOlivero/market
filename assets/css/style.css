@@ -1,0 +1,87 @@
+:root{
+  --brand: 99 102 241; /* indigo-500 */
+  --brand-600: 79 70 229; /* indigo-600 */
+  --brand-700: 67 56 202; /* indigo-700 */
+  --accent: 56 189 248;   /* sky-400 */
+}
+
+/* ===== Base y fondo (fix scroll + degradado) ===== */
+html { height:auto; }
+body{
+  min-height:100vh;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background:#0b1020;
+  color:#fff;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(1200px 800px at 10% 10%, rgba(147,197,253,.25), transparent 60%),
+    radial-gradient(1000px 700px at 90% 0%, rgba(251,146,60,.18), transparent 60%),
+    radial-gradient(900px 600px at 50% 100%, rgba(192,132,252,.18), transparent 60%);
+}
+
+/* tarjetas vidrio */
+.glass{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(14px);
+}
+.glass-soft{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  backdrop-filter: blur(12px);
+}
+
+.cta{
+  background:linear-gradient(135deg, rgb(var(--brand)) 0%, rgb(var(--brand-600)) 45%, rgb(var(--brand-700)) 100%);
+  box-shadow:0 8px 24px rgba(79,70,229,.45);
+}
+.cta:hover{ filter:brightness(1.08); }
+
+.chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:1.5rem; height:1.5rem; font-size:.75rem; font-weight:800;
+  border-radius:9999px; color:#fff;
+  background:linear-gradient(135deg, rgb(var(--brand)) 0%, rgb(var(--brand-700)) 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
+}
+
+.input{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff; border-radius:10px; padding:.75rem .9rem;
+  outline:none; transition:.2s;
+}
+.input:focus{
+  border-color:rgba(var(--accent)/1);
+  box-shadow:0 0 0 6px rgba(56,189,248,.12);
+}
+select.input{ padding-right:2.25rem }
+
+.hidden-file-input{ opacity:0; position:absolute; inset:0; width:100%; height:100%; cursor:pointer; }
+
+#status-message{ min-height:1.5rem }
+
+/* highlight drop */
+#drop-zone.dragover{ border-color:rgba(56,189,248,1); background:rgba(56,189,248,.06); }
+
+/* card seleccionada */
+.prompt-card-radio:checked + label{
+  border-color: rgb(var(--brand));
+  background: linear-gradient(180deg, rgba(99,102,241,.18), rgba(99,102,241,.08));
+}
+
+/* prompts largos no rompen */
+#prompt-options-container p{ overflow-wrap:anywhere; }
+
+/* alturas mínimas para evitar saltos */
+#url-preview-container, #drop-zone{ min-height:16rem; }
